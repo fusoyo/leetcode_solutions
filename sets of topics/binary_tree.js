@@ -68,19 +68,41 @@ const breadthFirstValues = (root) => {
     }
     const queue = [root]; //fifo; lilo;
     const values = [];
-    while(queue.length){
+    while (queue.length) {
         const current = queue.shift();
         values.push(current.val);
-        if(current.left!==null)queue.push(current.left);
-        if(current.right!==null)queue.push(current.right);
+        if (current.left !== null) queue.push(current.left);
+        if (current.right !== null) queue.push(current.right);
     }
     return values;
 }
 
 
-
+// console.log(breadthFirstValues(a))
 
 
 // ---------------------------------------------------------------------------------------------------------------------
+// use the or on the both right and left subtree to check whether a tree includes a number or not;
+const treeIncludes = (root, target) => {
+    //method1 --- a recursive method;
+    // if (root===null) return false; // when root is null, return false
+    // if (root.val===target)return true;  // if root.val equals to target, return true
+    // return treeIncludes(root.left,target) || treeIncludes(root.right,target)  // logic or;
 
-console.log(breadthFirstValues(a))
+    //method2 --- breath first seach
+    if (root === null) return false;
+    const queue = [root];
+
+    while (queue.length) {
+        let current = queue.shift();
+        if (current.val === target) return true;
+        if (current.left) queue.push(current.left);
+        if (current.right) queue.push(current.right);
+    }
+    return false;
+}
+
+console.log(treeIncludes(a, 'g'))
+
+
+
