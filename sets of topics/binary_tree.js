@@ -122,9 +122,9 @@ const treeSum = (root, sumSet = {}) => {
     return sum;
 };
 
-const h = new Node(3);
+const h = new Node(5);
 const i = new Node(11);
-const j = new Node(4);
+const j = new Node(-4);
 const k = new Node(4);
 const l = new Node(2);
 const m = new Node(1);
@@ -147,15 +147,28 @@ const treeSumRecursive = (root) => {
 // console.log(treeSumRecursive(h))
 
 //----------------------------------------------------------------------------------------------------------------------
-//minimum of a tree;
-const getMinimum = (root)=>{
-    if (root===null){return Infinity};
+//minimum of a tree; or use depth first or breadth first;
+const getMinimum = (root) => {
+    if (root === null) {
+        return Infinity
+    }
+    ;
 
     return Math.min(root.val, getMinimum(root.left), getMinimum(root.right));
 }
 
-console.log(getMinimum(h))
+// console.log(getMinimum(h))
 
 
+//----------------------------------------------------------------------------------------------------------------------
+//max root to leaf path sum; this is different from the leetcode 124;
+const maxPathSum = (root) => {
+    if (root === null) return -Infinity;
+    if (root.left === null && root.right === null) return root.val;
+
+    return root.val + Math.max(maxPathSum(root.left), maxPathSum(root.right))
+}
+
+console.log(maxPathSum(h))
 
 
