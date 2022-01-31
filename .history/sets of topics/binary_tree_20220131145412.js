@@ -1,9 +1,9 @@
 class Node {
-    constructor(val) {
-        this.val = val;
-        this.left = null;
-        this.right = null;
-    }
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
 }
 
 const a = new Node("a");
@@ -63,18 +63,18 @@ c.right = f;
 // ---------------------------------------------------------------------------------------------------------------------
 // breadth first values;
 const breadthFirstValues = (root) => {
-    if (root === null) {
-        return [];
-    }
-    const queue = [root]; //fifo; lilo;
-    const values = [];
-    while (queue.length) {
-        const current = queue.shift();
-        values.push(current.val);
-        if (current.left !== null) queue.push(current.left);
-        if (current.right !== null) queue.push(current.right);
-    }
-    return values;
+  if (root === null) {
+    return [];
+  }
+  const queue = [root]; //fifo; lilo;
+  const values = [];
+  while (queue.length) {
+    const current = queue.shift();
+    values.push(current.val);
+    if (current.left !== null) queue.push(current.left);
+    if (current.right !== null) queue.push(current.right);
+  }
+  return values;
 };
 
 // console.log(breadthFirstValues(a))
@@ -82,44 +82,43 @@ const breadthFirstValues = (root) => {
 // ---------------------------------------------------------------------------------------------------------------------
 // use the or on the both right and left subtree to check whether a tree includes a number or not;
 const treeIncludes = (root, target) => {
-    //method1 --- a recursive method;
-    // if (root===null) return false; // when root is null, return false
-    // if (root.val===target)return true;  // if root.val equals to target, return true
-    // return treeIncludes(root.left,target) || treeIncludes(root.right,target)  // logic or;
+  //method1 --- a recursive method;
+  // if (root===null) return false; // when root is null, return false
+  // if (root.val===target)return true;  // if root.val equals to target, return true
+  // return treeIncludes(root.left,target) || treeIncludes(root.right,target)  // logic or;
 
-    //method2 --- breath first seach
-    if (root === null) return false;
-    const queue = [root];
+  //method2 --- breath first seach
+  if (root === null) return false;
+  const queue = [root];
 
-    while (queue.length) {
-        let current = queue.shift();
-        if (current.val === target) return true;
-        if (current.left) queue.push(current.left);
-        if (current.right) queue.push(current.right);
-    }
-    return false;
+  while (queue.length) {
+    let current = queue.shift();
+    if (current.val === target) return true;
+    if (current.left) queue.push(current.left);
+    if (current.right) queue.push(current.right);
+  }
+  return false;
 };
 
 // console.log(treeIncludes(a, 'g'))
 
 //---------------------------------------------------------------------------------------------------------------------
 // tree-sum problem.
-// depth first
+
 const treeSum = (root, sumSet = {}) => {
-    if (root === null) return 0; // when root is null, return
-    const stack = [root];
-    let sum = 0;
-    while (stack.length) {
-        curr = stack.pop();
-        if (curr) {
-            sum = sum + curr.val;
-        } else {
-            sum = sum + 0;
-        }
-        if (curr.left) stack.push(curr.left);
-        if (curr.right) stack.push(curr.right);
+  const stack = [root];
+  let sum = 0;
+  while (stack.length) {
+    curr = stack.pop();
+    if (curr) {
+      sum = sum + curr.val;
+    } else {
+      sum = sum + curr.val;
     }
-    return sum;
+    if (curr.left) stack.push(curr.left);
+    if (curr.right) stack.push(curr.right);
+  }
+  return sum;
 };
 
 const h = new Node(3);
@@ -132,30 +131,6 @@ const m = new Node(1);
 h.left = i;
 h.right = j;
 i.left = k;
-i.right = l;
+b.right = l;
 j.right = m;
-// console.log(treeSum(h));
-
-//recursive
-const treeSumRecursive = (root) => {
-    if (root === null) return 0; // when root is null, return
-    return root.val + treeSum(root.left) + treeSum(root.right);
-
-
-}
-
-// console.log(treeSumRecursive(h))
-
-//----------------------------------------------------------------------------------------------------------------------
-//minimum of a tree;
-const getMinimum = (root)=>{
-    if (root===null){return Infinity};
-
-    return Math.min(root.val, getMinimum(root.left), getMinimum(root.right));
-}
-
-console.log(getMinimum(h))
-
-
-
-
+console.log(treeSum(h));
