@@ -72,43 +72,4 @@ const gridTravelerMemo = (m, n, memo = {}) => {
 // dynamic programming problem ---  1. make it work( visualize the problem as tree; implement the tree using recursion; test it) ; 2.make it efficient(add a memo object; add a base case to return memo values ; store return values into the memo)
 
 
-//----------------------------------------------------------------------------------------------------------------------
-// write a function 'canSum(targetSum, numbers) that takes in a targetSum and an array of numbers as arguments;
-// canSum(7, [5,3,4,7]) -> return true
-const canSum = (targetSum, numbers) => {
-    if (targetSum === 0) return true; // as the base value
-    if (targetSum < 0) return false; // cuz negative number is not what we need
-    // for loop to start the next call
-    for (let num in numbers) {
-        const remainder = targetSum - num;
-        if (canSum(remainder, numbers) === true) {
-            return true
-        }// use numbers's elements many times
-    }
-    // when for loop is over return false
-    return false
-}
-
-// console.log(canSum(7, [7]))
-// console.log(canSum(8, [5, 3, 8, 1, 7]))
-
-const canSumMemo = (targetSum, numbers, memo = {}) => {
-    if (targetSum in memo) return memo[targetSum];
-    if (targetSum === 0) return true; // as the base value
-    if (targetSum < 0) return false; // cuz negative number is not what we need
-    // for loop to start the next call
-    for (let num in numbers) {
-        const remainder = targetSum - num;
-        if (canSumMemo(remainder, numbers, memo) === true) {
-            memo[targetSum] = true
-            return true
-        }// use numbers's elements many times
-    }
-    // when for loop is over return false
-    memo[targetSum] = false
-    return false
-}
-
-console.log(canSumMemo(7, [5, 3, 4]))
-
 
