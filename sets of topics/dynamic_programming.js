@@ -91,7 +91,7 @@ const canSum = (targetSum, numbers) => {
 
 // console.log(canSum(7, [7]))
 // console.log(canSum(8, [5, 3, 8, 1, 7]))
-
+//dynamic programming with numbers
 const canSumMemo = (targetSum, numbers, memo = {}) => {
     if (targetSum in memo) return memo[targetSum];
     if (targetSum === 0) return true; // as the base value
@@ -109,9 +109,31 @@ const canSumMemo = (targetSum, numbers, memo = {}) => {
     return false
 }
 
-console.log(canSumMemo(7, [5, 3, 4]))
+// console.log(canSumMemo(7, [5, 3, 4]))
 
 
+//----------------------------------------------------------------------------------------------------------------------
+//write a function bestSum(targetSum,numbers) that takes in a targetSum and an array of numbers as arguments
+//the function should return an array containing the shortest combination of numbers that add up to exactly the targetSum.
+//if there is a tie for the shortest combination, you may return any one of the shortest
+const bestSum = (targetSum, numbers) => {
+    if (targetSum === 0) return [] //base case
+    if (targetSum < 0) return null //means impossible to return an element
+
+    let shortestCombination = null;
+    for (let num in numbers) {
+        const remainder = targetSum - num;
+        const remainderCombination = bestSum(remainder, numbers); //from best sum will get an array
+        //update shortest combination
+        if (shortestCombination === null || remainderCombination.length < shortestCombination.length) {
+            shortestCombination = remainderCombination;
+        }
+    }
+    return shortestCombination;
+}
+
+
+console.log(bestSum(7, [5, 3, 4, 7]))
 
 
 
